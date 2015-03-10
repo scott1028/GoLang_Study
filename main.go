@@ -1,4 +1,6 @@
 // 這是一個基於 GoLang 所撰寫的網路爬蟲。
+// ref: http://blog.enoir.tw/2014/09/15/%E6%B7%BA%E8%AB%87GO%E8%AA%9E%E8%A8%80%E4%B8%AD%E7%9A%84defer/
+// ref: http://negaihoshi.logdown.com/posts/70147-go-way-of-language-learning-c
 // ref: https://golang.org/doc/effective_go.html
 // ref: http://zh.wikipedia.org/wiki/Go
 // ref: http://golang.org/doc/install#windows
