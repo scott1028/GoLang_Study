@@ -91,4 +91,14 @@ func main() {
 	ff = &ee
 	*ff = 70
 	fmt.Println(ee)
+
+	// Golang GoTo Statement
+	count := 0
+Savepoint:
+	count += 1
+	if count <= 10 {
+		fmt.Println("Execute goto statement.")
+		goto Savepoint
+	}
+	fmt.Println(count)
 }
