@@ -122,6 +122,22 @@ Savepoint:
 	// use alia module name
 	stdout.Println("use alia for 'fmt' modules")
 
+	// use stuct
+	obj := new(person)
+	obj.age = 1
+	obj.name = "scott"
+	fmt.Println(obj.age)
+	fmt.Println(obj.name)
+	fmt.Println(obj)
+
+	var obj2 person
+	obj2.age = 2
+	obj2.name = "alan"
+	fmt.Println(obj2)
+
+	obj3 := person{age: 30, name: "Donald"}
+	fmt.Println(obj3)
+
 	// work for panic()
 	defer func() {
 		fmt.Println(recover())
@@ -157,4 +173,10 @@ func add4(x int, fn lambda) int {
 // test panic
 func test() {
 	panic("Throw some error")
+}
+
+// define my struct
+type person struct {
+	name string
+	age  int
 }
