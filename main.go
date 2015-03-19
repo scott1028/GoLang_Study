@@ -109,6 +109,11 @@ Savepoint:
 	fmt.Println(yy)
 	fmt.Println(tt)
 	fmt.Println(add3(99, 2, 3))
+
+	// 在 defer 后指定的函数会在函数退出前调用。(可用於 open-close file ...etc)
+	defer fmt.Println("This is a defer logic #1")
+	defer fmt.Println("This is a defer logic #2 (invoked first)")
+	fmt.Println("Before defer logic")
 }
 
 // function name(args) returnType { ... }
