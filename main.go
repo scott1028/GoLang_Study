@@ -12,6 +12,7 @@ package main
 
 import (
 	"fmt"
+	stdout "fmt"
 	"io/ioutil"
 	"net/http"
 	"regexp"
@@ -118,6 +119,9 @@ Savepoint:
 	// pass a lambda func into func
 	fmt.Println(add4(100, add1))
 
+	// use alia module name
+	stdout.Println("use alia for 'fmt' modules")
+
 	// work for panic()
 	defer func() {
 		fmt.Println(recover())
@@ -152,5 +156,5 @@ func add4(x int, fn lambda) int {
 
 // test panic
 func test() {
-	panic("Throw some error.")
+	panic("Throw some error")
 }
