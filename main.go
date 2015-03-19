@@ -117,6 +117,15 @@ Savepoint:
 
 	// pass a lambda func into func
 	fmt.Println(add4(100, add1))
+
+	// work for panic()
+	defer func() {
+		fmt.Println(recover())
+	}()
+
+	// not work for panic()
+	//defer fmt.Println(recover())
+	test()
 }
 
 // function name(args) returnType { ... }
@@ -139,4 +148,9 @@ type lambda func(int, int) int
 
 func add4(x int, fn lambda) int {
 	return x + fn(x, x)
+}
+
+// test panic
+func test() {
+	panic("Throw some error.")
 }
