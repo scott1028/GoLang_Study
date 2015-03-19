@@ -138,6 +138,20 @@ Savepoint:
 	obj3 := person{age: 30, name: "Donald"}
 	fmt.Println(obj3)
 
+	// test golang OOP
+	obj4 := new(Student)
+	obj4.age = 30
+	obj4.name = "Lulu"
+	obj4.skill = "study"
+	obj4.echo = echo_action
+	fmt.Println(obj4.age)
+	fmt.Println(obj4.echo())
+	fmt.Println(obj4)
+	obj4.test_self_action()
+	obj4.test_run()
+	//	obj4.test_echo = test_self_action
+	//	obj4.test_echo()
+
 	// work for panic()
 	defer func() {
 		fmt.Println(recover())
@@ -179,4 +193,34 @@ func test() {
 type person struct {
 	name string
 	age  int
+}
+
+// golang OOP by struct
+type Human struct { // parent schema
+	name string
+	age  int
+}
+
+type echo func() bool // method mixin
+type test_echo func() // method mixin
+
+type Student struct { // final schema
+	Human
+	echo
+	test_echo // 可以不定義, 就像 test_run Method 一樣
+	skill     string
+}
+
+func echo_action() bool {
+	fmt.Println("student echo!")
+	return true
+}
+
+func (r *Student) test_self_action() {
+	fmt.Print("this is instance method get age->")
+	fmt.Println(r.age)
+}
+
+func (r *Student) test_run() {
+	fmt.Println("test_run by " + r.name)
 }
