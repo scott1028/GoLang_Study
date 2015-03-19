@@ -80,4 +80,15 @@ func main() {
 	// mean dd = is address point to where is a *dd value
 	fmt.Println(dd)
 	fmt.Println(&dd) // get address of this point dd, it's difference with dd.
+
+	// Golang Pointer
+	// http://blog.golang.org/gos-declaration-syntax#TOC_3.
+	var ee int
+	fmt.Println(ee)
+
+	var ff *int
+	fmt.Println(ff)
+	ff = &ee
+	*ff = 70
+	fmt.Println(ee)
 }
