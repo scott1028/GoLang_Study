@@ -101,4 +101,20 @@ Savepoint:
 		goto Savepoint
 	}
 	fmt.Println(count)
+
+	// test go func return multi value
+	kk := add1(1, 3)
+	tt, yy := add2(10, 20)
+	fmt.Println(kk)
+	fmt.Println(yy)
+	fmt.Println(tt)
+}
+
+// function name(args) returnType { ... }
+func add1(x int, y int) int {
+	return x + y
+}
+
+func add2(x int, y int) (int, int) {
+	return x + y, x * y
 }
