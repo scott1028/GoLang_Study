@@ -114,6 +114,9 @@ Savepoint:
 	defer fmt.Println("This is a defer logic #1")
 	defer fmt.Println("This is a defer logic #2 (invoked first)")
 	fmt.Println("Before defer logic")
+
+	// pass a lambda func into func
+	fmt.Println(add4(100, add1))
 }
 
 // function name(args) returnType { ... }
@@ -129,4 +132,11 @@ func add2(x int, y int) (int, int) {
 func add3(xs ...int) int {
 	fmt.Println(len(xs))
 	return xs[0]
+}
+
+// define a customize func type for using later
+type lambda func(int, int) int
+
+func add4(x int, fn lambda) int {
+	return x + fn(x, x)
 }
