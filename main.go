@@ -108,6 +108,7 @@ Savepoint:
 	fmt.Println(kk)
 	fmt.Println(yy)
 	fmt.Println(tt)
+	fmt.Println(add3(99, 2, 3))
 }
 
 // function name(args) returnType { ... }
@@ -117,4 +118,10 @@ func add1(x int, y int) int {
 
 func add2(x int, y int) (int, int) {
 	return x + y, x * y
+}
+
+// 不定參數
+func add3(xs ...int) int {
+	fmt.Println(len(xs))
+	return xs[0]
 }
