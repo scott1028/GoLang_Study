@@ -44,4 +44,40 @@ func main() {
 		fmt.Println(idx)
 		fmt.Println(elm)
 	}
+
+	a := map[string]int{"a": 1}
+	fmt.Println(a)
+	const (
+		c = iota
+		e = iota
+		d = iota
+	)
+	fmt.Println(c)
+	fmt.Println(d)
+
+	// test make T, len, capacity
+	cc := make([]int, 4, 8)
+	cc[0] = 1
+	cc[1] = 2
+	cc[2] = 2
+	cc[3] = 2
+	// redesing array in limit of his capacity.
+	cc = cc[:6]
+	// redesing array in limit of his capacity again.
+	cc = cc[:8]
+
+	// will throw error due to out of his capacity
+	// cc = cc[:9]
+
+	fmt.Println(cc)
+	fmt.Println(cap(cc))
+	fmt.Println(len(cc))
+
+	// test new
+	dd := new(string)
+	*dd = "2"
+	fmt.Println(*dd)
+	// mean dd = is address point to where is a *dd value
+	fmt.Println(dd)
+	fmt.Println(&dd) // get address of this point dd, it's difference with dd.
 }
