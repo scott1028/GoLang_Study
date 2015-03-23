@@ -173,6 +173,14 @@ Savepoint:
 	_c.echo()
 	_c = _a
 	_c.echo()
+
+	// 作為通用容器用途, 但是所有特性[Method, Property]都會不能存取
+	var _d interface{}
+	_d = _a
+	fmt.Println(_d)
+	// _c = _d
+	// _c.echo()			// 將出錯, 因為先前已將特性去除
+
 	// Interface Study End
 
 	// work for panic()
