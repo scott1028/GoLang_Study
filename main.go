@@ -159,6 +159,22 @@ Savepoint:
 	fmt.Print("Rect area->")
 	fmt.Println(obj5.area())
 
+	// Interface Study Start
+	_a := new(A)
+	_a.name = "Scott"
+	_a.echo()
+
+	_b := new(B)
+	_b.name = "Alan"
+	_b.echo()
+
+	var _c A_and_B
+	_c = _b
+	_c.echo()
+	_c = _a
+	_c.echo()
+	// Interface Study End
+
 	// work for panic()
 	defer func() {
 		fmt.Println(recover())
@@ -251,3 +267,31 @@ func (self *Rect) area() float64 {
 }
 
 // OOP Style End
+
+// Interface Style
+
+type A struct {
+	name string
+}
+
+type B struct {
+	name string
+}
+
+func (self A) echo() { // 這樣才是正確的, 如果用 *A 會變成 Reference 但是於 Golang 內會自動轉換依然可以正常 Work！
+	fmt.Println(self)
+	fmt.Println(self.name)
+	fmt.Println("I'm A echoing!")
+}
+
+func (self B) echo() { // 這樣才是正確的, 如果用 *A 會變成 Reference 但是於 Golang 內會自動轉換依然可以正常 Work！
+	fmt.Println(self)
+	fmt.Println(self.name)
+	fmt.Println("I'm B echoing!")
+}
+
+type A_and_B interface {
+	echo()
+}
+
+// Interface Style End
