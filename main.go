@@ -17,6 +17,7 @@ import (
 	"net/http"
 	"regexp"
 	"sort"
+	"time"
 )
 
 func main() {
@@ -205,6 +206,17 @@ Savepoint:
 	}
 	// switch study end
 
+	// goroutin, threading start
+	// *fmt.Println() 不會從 routine 印出在 main threading 上
+	fmt.Println("start goroutin")
+	flag := 50
+	go test_routine(&flag)
+	go test_routine(&flag)
+	time.Sleep(1) // wait routine finished, 如果沒這一行會印出 50 而非 52。
+	fmt.Println(flag)
+	fmt.Println("end goroutin")
+	// goroutin, threading end
+
 	// work for panic()
 	defer func() {
 		fmt.Println(recover())
@@ -334,3 +346,9 @@ type CC interface {
 }
 
 // include others Schema mix-in end
+
+func test_routine(flag *int) int {
+	fmt.Println("test routine!")
+	*flag += 1
+	return *flag
+}
