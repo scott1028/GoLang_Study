@@ -149,6 +149,7 @@ Savepoint:
 	fmt.Println(obj4)
 	obj4.test_self_action()
 	obj4.test_run()
+	obj4.test_run_try()
 	//	obj4.test_echo = test_self_action
 	//	obj4.test_echo()
 
@@ -209,6 +210,10 @@ type Human struct { // parent schema
 
 func (r *Human) test_run() {
 	fmt.Println("Human test_run by " + r.name)
+}
+
+func (r *Human) test_run_try() {
+	fmt.Println("Human test_run_try by " + r.name)
 }
 
 type echo func() bool // method mixin
