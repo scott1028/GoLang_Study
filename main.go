@@ -152,6 +152,12 @@ Savepoint:
 	//	obj4.test_echo = test_self_action
 	//	obj4.test_echo()
 
+	obj5 := new(Rect)
+	obj5.height = 1.5
+	obj5.width = 1.5
+	fmt.Print("Rect area->")
+	fmt.Println(obj5.area())
+
 	// work for panic()
 	defer func() {
 		fmt.Println(recover())
@@ -224,3 +230,14 @@ func (r *Student) test_self_action() {
 func (r *Student) test_run() {
 	fmt.Println("test_run by " + r.name)
 }
+
+// OOP Style
+type Rect struct {
+	width, height float64
+}
+
+func (self *Rect) area() float64 {
+	return self.height * self.width
+}
+
+// OOP Style End
