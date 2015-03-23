@@ -207,6 +207,10 @@ type Human struct { // parent schema
 	age  int
 }
 
+func (r *Human) test_run() {
+	fmt.Println("Human test_run by " + r.name)
+}
+
 type echo func() bool // method mixin
 type test_echo func() // method mixin
 
@@ -227,6 +231,7 @@ func (r *Student) test_self_action() {
 	fmt.Println(r.age)
 }
 
+// override - func (r *Human) test_run()
 func (r *Student) test_run() {
 	fmt.Println("test_run by " + r.name)
 }
