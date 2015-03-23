@@ -16,6 +16,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"regexp"
+	"sort"
 )
 
 func main() {
@@ -183,6 +184,27 @@ Savepoint:
 
 	// Interface Study End
 
+	// 斷言 Start
+	var value interface{}
+	str, ok := value.(string)
+	fmt.Println(str)
+	fmt.Println(ok)
+
+	value = "31232"
+	str2, ok2 := value.(string)
+	fmt.Println(str2)
+	fmt.Println(ok2)
+	// 斷言 End
+
+	// switch study start
+	switch 1 {
+	case 1:
+		fmt.Println("this is 1")
+	default:
+		fmt.Println("this is not 1")
+	}
+	// switch study end
+
 	// work for panic()
 	defer func() {
 		fmt.Println(recover())
@@ -303,3 +325,12 @@ type A_and_B interface {
 }
 
 // Interface Style End
+
+// include others Schema mix-in start
+type CC interface {
+	sort.Interface // mix in methods
+	echo()
+	pop() interface{} // add 匿名 method
+}
+
+// include others Schema mix-in end
