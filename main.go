@@ -227,7 +227,7 @@ Savepoint:
 	fmt.Println(out_2)
 	// goroutin, sync end
 
-	// goroutin, ierator sync start
+	// goroutin, iterator sync start
 	ch2 := make(chan int)
 	go sum2(1, 7, ch2)
 	fmt.Println("start")
@@ -235,7 +235,31 @@ Savepoint:
 		fmt.Println(i)
 	}
 	fmt.Println("end")
-	// goroutin, ierator sync end
+	// goroutin, iterator sync end
+
+	// goroutin, iterator by select-case start
+	ch3 := make(chan int)
+	ch4 := make(chan int)
+	ch5 := make(chan int)
+	go sum(555, 2, ch3)
+	go sum(666, 4, ch4)
+	go sum(777, 6, ch5)
+wait_chX:
+	select {
+	case i := <-ch3: // if you want to use value of i
+		fmt.Print(i)
+		fmt.Println("; ch3 is okay.")
+	case <-ch4:
+		fmt.Println("ch4 is okay.")
+	case <-ch5:
+		fmt.Println("ch5 is okay.")
+	default:
+		//	当c阻塞的时候执行这里
+		fmt.Println("ch#X blocking...")
+		time.Sleep(1)
+		goto wait_chX
+	}
+	// goroutin, iterator by select-case end
 
 	// work for panic()
 	defer func() {
