@@ -217,6 +217,16 @@ Savepoint:
 	fmt.Println("end goroutin")
 	// goroutin, threading end
 
+	// goroutin, sync start
+	ch := make(chan int)
+	go sum(1, 2, ch)
+	go sum(7, 2, ch)
+	out_1 := <-ch // sync
+	fmt.Println(out_1)
+	out_2 := <-ch // sync
+	fmt.Println(out_2)
+	// goroutin, sync end
+
 	// work for panic()
 	defer func() {
 		fmt.Println(recover())
@@ -347,8 +357,19 @@ type CC interface {
 
 // include others Schema mix-in end
 
+// async routine/threading start
 func test_routine(flag *int) int {
 	fmt.Println("test routine!")
 	*flag += 1
 	return *flag
 }
+
+// async routine/threading end
+
+// multi-threading sync by channel start
+func sum(x int, y int, queue chan int) {
+	t := x + y + 1000
+	queue <- t
+}
+
+// multi-threading sync by channel end
