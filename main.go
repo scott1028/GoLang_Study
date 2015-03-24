@@ -206,7 +206,7 @@ Savepoint:
 	}
 	// switch study end
 
-	// goroutin, threading start
+	// goroutine, threading start
 	// *fmt.Println() 不會從 routine 印出在 main threading 上
 	fmt.Println("start goroutin")
 	flag := 50
@@ -215,9 +215,9 @@ Savepoint:
 	time.Sleep(1) // wait routine finished, 如果沒這一行會印出 50 而非 52。
 	fmt.Println(flag)
 	fmt.Println("end goroutin")
-	// goroutin, threading end
+	// goroutine, threading end
 
-	// goroutin, sync start
+	// goroutine, sync start
 	ch := make(chan int)
 	go sum(1, 2, ch)
 	go sum(7, 2, ch)
@@ -225,7 +225,7 @@ Savepoint:
 	fmt.Println(out_1)
 	out_2 := <-ch // sync
 	fmt.Println(out_2)
-	// goroutin, sync end
+	// goroutine, sync end
 
 	// goroutin, iterator sync start
 	ch2 := make(chan int)
@@ -235,9 +235,9 @@ Savepoint:
 		fmt.Println(i)
 	}
 	fmt.Println("end")
-	// goroutin, iterator sync end
+	// goroutine, iterator sync end
 
-	// goroutin, iterator by select-case start
+	// goroutine, iterator by select-case start
 	ch3 := make(chan int)
 	ch4 := make(chan int)
 	ch5 := make(chan int)
@@ -256,10 +256,24 @@ wait_chX:
 	default:
 		//	当c阻塞的时候执行这里
 		fmt.Println("ch#X blocking...")
-		time.Sleep(1)
+		time.Sleep(1 * time.Second)
 		goto wait_chX
 	}
-	// goroutin, iterator by select-case end
+	// goroutine, iterator by select-case end
+
+	// goroutine ,interator by set wait timeout start
+	ch6 := make(chan int)
+	ch7 := make(chan int)
+	select {
+	case <-time.After(2 * time.Second): // 等待超時設定
+		fmt.Println("ch6 & ch7 is timeout.")
+		break
+	case <-ch6:
+		fmt.Println("ch6 is okay.")
+	case <-ch7:
+		fmt.Println("ch7 is okay.")
+	}
+	// goroutine ,interator by set wait timeout end
 
 	// work for panic()
 	defer func() {
@@ -402,6 +416,7 @@ func test_routine(flag *int) int {
 
 // multi-threading sync by channel start
 func sum(x int, y int, queue chan int) {
+	time.Sleep(2 * time.Second)
 	t := x + y + 1000
 	queue <- t
 }
