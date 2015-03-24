@@ -227,6 +227,16 @@ Savepoint:
 	fmt.Println(out_2)
 	// goroutin, sync end
 
+	// goroutin, ierator sync start
+	ch2 := make(chan int)
+	go sum2(1, 7, ch2)
+	fmt.Println("start")
+	for i := range ch2 {
+		fmt.Println(i)
+	}
+	fmt.Println("end")
+	// goroutin, ierator sync end
+
 	// work for panic()
 	defer func() {
 		fmt.Println(recover())
@@ -370,6 +380,13 @@ func test_routine(flag *int) int {
 func sum(x int, y int, queue chan int) {
 	t := x + y + 1000
 	queue <- t
+}
+
+func sum2(x int, y int, queue chan int) {
+	for i := 0; i < y; i++ {
+		queue <- i
+	}
+	close(queue)
 }
 
 // multi-threading sync by channel end
